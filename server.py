@@ -343,6 +343,11 @@ class ListActivitiesInput(BaseModel):
         None,
         description="Filter by visibility. Example: true"
     )
+    term: Optional[str] = Field(
+        None,
+        max_length=200,
+        description="Search term to filter activities by name. Example: 'Code Review' or 'FNNLR' or '7313'"
+    )
     page: int = Field(
         1,
         ge=1,
@@ -1333,6 +1338,8 @@ async def call_tool(name: str, arguments: Any) -> list[TextContent]:
                 query_params["project"] = params.project
             if params.visible is not None:
                 query_params["visible"] = "1" if params.visible else "0"
+            if params.term:
+                query_params["term"] = params.term
 
             result = await client.request("GET", "activities", params=query_params)
 
