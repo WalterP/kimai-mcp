@@ -24,10 +24,35 @@ source .venv/bin/activate
 python3 test_connection.py
 ```
 
-## 📝 Add to Claude Desktop
+## 📝 Add to Claude Code
+
+Edit your Claude Code MCP settings:
+
+**Location**: `~/.claude/mcp_settings.json`
+
+```json
+{
+  "mcpServers": {
+    "kimai": {
+      "command": "/projects/personal/kimai-mcp/.venv/bin/python",
+      "args": ["/projects/personal/kimai-mcp/server.py"],
+      "env": {
+        "KIMAI_BASE_URL": "http://localhost:8001",
+        "KIMAI_API_TOKEN": "<your_token_here>"
+      }
+    }
+  }
+}
+```
+
+Restart Claude Code to load the MCP server.
+
+## 📝 Add to Claude Desktop (Optional)
 
 Edit your Claude Desktop config:
 
+**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 **Linux**: `~/.config/Claude/claude_desktop_config.json`
 
 ```json
@@ -38,7 +63,7 @@ Edit your Claude Desktop config:
       "args": ["/projects/personal/kimai-mcp/server.py"],
       "env": {
         "KIMAI_BASE_URL": "http://localhost:8001",
-        "KIMAI_API_TOKEN": "your_token_here"
+        "KIMAI_API_TOKEN": "<your_token_here>"
       }
     }
   }

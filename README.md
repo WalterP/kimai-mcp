@@ -96,6 +96,37 @@ The server requires two environment variables:
 | `KIMAI_BASE_URL`  | Base URL of your KIMAI instance     | `http://localhost:8001` |
 | `KIMAI_API_TOKEN` | Bearer token for API authentication | `<token_here>`          |
 
+### Claude Code Configuration
+
+To use this MCP server with Claude Code (CLI), add it to your MCP settings file.
+
+**Location:** `~/.claude/mcp_settings.json` or your project's `.claude/mcp_settings.json`
+
+Add the following configuration:
+
+```json
+{
+  "mcpServers": {
+    "kimai": {
+      "command": "/projects/personal/kimai-mcp/.venv/bin/python",
+      "args": ["/projects/personal/kimai-mcp/server.py"],
+      "env": {
+        "KIMAI_BASE_URL": "http://localhost:8001",
+        "KIMAI_API_TOKEN": "<your_api_token_here>"
+      }
+    }
+  }
+}
+```
+
+**Important Notes:**
+- Use absolute paths for both `command` and `args`
+- Replace `/projects/personal/kimai-mcp` with your actual installation path
+- Replace `<your_api_token_here>` with your KIMAI API token
+- The Python binary should point to your virtual environment
+
+After adding the configuration, restart Claude Code to load the MCP server. You can verify it's loaded by checking for KIMAI-related tools.
+
 ### Claude Desktop Configuration
 
 Add this MCP server to your Claude Desktop configuration:
