@@ -1187,7 +1187,7 @@ async def call_tool(name: str, arguments: Any) -> list[TextContent]:
             data = {
                 "project": params.project,
                 "activity": params.activity,
-                "begin": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S"),
+                "begin": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             }
             if params.description:
                 data["description"] = params.description
@@ -1212,7 +1212,7 @@ async def call_tool(name: str, arguments: Any) -> list[TextContent]:
 
             # Stop the timesheet
             data = {
-                "end": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")
+                "end": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
             }
             result = await client.request("PATCH", f"timesheets/{params.id}", json_data=data)
             return [TextContent(
